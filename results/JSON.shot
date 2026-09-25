@@ -1,0 +1,36 @@
+{
+  "project": "ai-learn-17-reranker-scratch",
+  "seed": 42,
+  "config": {
+    "depth": 20,
+    "n_topics": 40,
+    "queries_per_topic": 3,
+    "p_syn": 0.5,
+    "test_frac": 0.3,
+    "dense_dim": 32,
+    "lr_epochs": 500,
+    "mlp_hidden": 16,
+    "mlp_epochs": 1500
+  },
+  "n_train": 84,
+  "n_test": 36,
+  "test_ndcg@5": {
+    "bm25_first_stage": 0.6919,
+    "pointwise_lr": 0.7536,
+    "pairwise_lr": 0.764,
+    "pointwise_mlp": 0.7551,
+    "oracle": 0.8044
+  },
+  "test_mrr@10": {
+    "bm25_first_stage": 0.744,
+    "pointwise_lr": 0.8009,
+    "pairwise_lr": 0.8148,
+    "pointwise_mlp": 0.8009,
+    "oracle": 0.8333
+  },
+  "first_stage_recall@20_test": 0.75,
+  "best_reranker": "pairwise_lr",
+  "test_ndcg@5_gain": 0.0721,
+  "runtime_s": 0.384,
+  "pass": true
+}

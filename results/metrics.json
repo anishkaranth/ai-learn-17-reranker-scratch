@@ -1,0 +1,122 @@
+{
+ "project": "ai-learn-17-reranker-scratch",
+ "seed": 42,
+ "config": {
+  "depth": 20,
+  "n_topics": 40,
+  "queries_per_topic": 3,
+  "p_syn": 0.5,
+  "test_frac": 0.3,
+  "dense_dim": 32,
+  "lr_epochs": 500,
+  "mlp_hidden": 16,
+  "mlp_epochs": 1500
+ },
+ "dataset": {
+  "n_docs": 120,
+  "n_queries": 120,
+  "n_train": 84,
+  "n_test": 36,
+  "test_topics": [2, 3, 4, 8, 15, 23, 24, 25, 27, 28, 31, 33]
+ },
+ "features": ["bm25", "bm25_rel_max", "dense_cos", "coverage", "title_overlap", "max_qtf", "log_len", "first_stage_rr"],
+ "metric_keys": ["ndcg@5", "mrr@10", "recall@1", "recall@5"],
+ "train_rows": 1680,
+ "n_pairs": 2214,
+ "first_stage_recall": {
+  "train": 0.7083,
+  "test": 0.75
+ },
+ "train": {
+  "bm25_first_stage": {
+   "ndcg@5": 0.7502,
+   "mrr@10": 0.8036,
+   "recall@1": 0.381,
+   "recall@5": 0.6845
+  },
+  "pointwise_lr": {
+   "ndcg@5": 0.7921,
+   "mrr@10": 0.8571,
+   "recall@1": 0.4286,
+   "recall@5": 0.7024
+  },
+  "pairwise_lr": {
+   "ndcg@5": 0.7942,
+   "mrr@10": 0.8571,
+   "recall@1": 0.4286,
+   "recall@5": 0.7083
+  },
+  "pointwise_mlp": {
+   "ndcg@5": 0.7928,
+   "mrr@10": 0.8571,
+   "recall@1": 0.4286,
+   "recall@5": 0.6964
+  },
+  "oracle": {
+   "ndcg@5": 0.8054,
+   "mrr@10": 0.8571,
+   "recall@1": 0.4286,
+   "recall@5": 0.7083
+  }
+ },
+ "test": {
+  "bm25_first_stage": {
+   "ndcg@5": 0.6919,
+   "mrr@10": 0.744,
+   "recall@1": 0.3472,
+   "recall@5": 0.6389
+  },
+  "pointwise_lr": {
+   "ndcg@5": 0.7536,
+   "mrr@10": 0.8009,
+   "recall@1": 0.3889,
+   "recall@5": 0.6944
+  },
+  "pairwise_lr": {
+   "ndcg@5": 0.764,
+   "mrr@10": 0.8148,
+   "recall@1": 0.4028,
+   "recall@5": 0.6944
+  },
+  "pointwise_mlp": {
+   "ndcg@5": 0.7551,
+   "mrr@10": 0.8009,
+   "recall@1": 0.3889,
+   "recall@5": 0.6944
+  },
+  "oracle": {
+   "ndcg@5": 0.8044,
+   "mrr@10": 0.8333,
+   "recall@1": 0.4167,
+   "recall@5": 0.75
+  }
+ },
+ "test_flips": {
+  "pointwise_lr": {
+   "improved": 10,
+   "unchanged": 26,
+   "worse": 0
+  },
+  "pairwise_lr": {
+   "improved": 11,
+   "unchanged": 25,
+   "worse": 0
+  },
+  "pointwise_mlp": {
+   "improved": 10,
+   "unchanged": 26,
+   "worse": 0
+  }
+ },
+ "weights": {
+  "pointwise_lr": [0.3865, 0.4667, 0.4642, 0.5822, 0.6257, -0.5027, 0.0012, 0.3174],
+  "pairwise_lr": [0.4442, 0.4432, 0.9566, 0.9831, 0.3205, -0.6333, 0.0012, 0.382]
+ },
+ "loss": {
+  "pointwise_lr": [0.6973, 0.0826],
+  "pairwise_lr": [0.7252, 0.0434],
+  "pointwise_mlp": [0.2183, 0.0281]
+ },
+ "runtime_s": 0.384,
+ "plots": ["rerank_before_after.svg", "feature_weights.svg"]
+}
